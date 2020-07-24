@@ -2,7 +2,7 @@
   <div class="table__group">
     <div class="table__row">
       <span
-        v-if="employees.length"
+        v-if="isAnyEmployees"
         :class="['table__btn', { 'table__btn--up': showEmployees }]"
         @click="showEmployees = !showEmployees"
       >&#9660;</span>
@@ -42,6 +42,9 @@ export default {
   computed: {
     employees() {
       return this.users.filter((user) => user.chief === this.user.id);
+    },
+    isAnyEmployees() {
+      return this.employees.length > 0;
     },
   },
 };

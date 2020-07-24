@@ -2,8 +2,8 @@
   <div class="layout">
     <div class="table">
       <div class="table__row">
-        <div class="table__username"><strong class="clickable" @click="sortByName">Имя</strong></div>
-        <div class="table__tel"><strong class="clickable" @click="sortByPhoneNumber">Телефон</strong></div>
+        <div class="table__username"><strong class="clickable" @click="sortByField('username')">Имя</strong></div>
+        <div class="table__tel"><strong class="clickable" @click="sortByField('telephone')">Телефон</strong></div>
       </div>
       <User v-for="user in chiefs" :key="user.id" :user="user" :users="users" />
       <p v-if="!users.length">Вы не добавили пользователей!</p>
@@ -54,23 +54,12 @@ export default {
       this.users.push(user);
       localStorage.setItem('users', JSON.stringify(this.users));
     },
-    sortByName() {
+    sortByField(field) {
       this.users.sort((a, b) => {
-        if (a.username > b.username) {
+        if (a[field] > b[field]) {
           return 1;
         }
-        if (a.username < b.username) {
-          return -1;
-        }
-        return 0;
-      });
-    },
-    sortByPhoneNumber() {
-      this.users.sort((a, b) => {
-        if (a.telephone > b.telephone) {
-          return 1;
-        }
-        if (a.telephone < b.telephone) {
+        if (a[field] < b[field]) {
           return -1;
         }
         return 0;
