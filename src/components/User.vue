@@ -7,7 +7,7 @@
         @click="showEmployees = !showEmployees"
       >&#9660;</span>
       <div class="table__username">{{ user.username }}</div>
-      <div class="table__tel">+7{{ user.telephone }}</div>
+      <div class="table__tel">{{ user.telephone }}</div>
     </div>
     <div v-if="showEmployees">
       <User

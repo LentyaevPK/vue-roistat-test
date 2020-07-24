@@ -10,11 +10,10 @@
       <label>Телефон</label>
       <input
         type="tel"
-        pattern="\([0-9]{3}\)[0-9]{3}-[0-9]{4}"
+        v-mask="mask"
         v-model="telephone"
         required
       />
-      <small class="form__hint">Введите номер в формате: (123)123-1234</small>
     </div>
     <div class="form__input">
       <label>Начальник</label>
@@ -30,6 +29,8 @@
 </template>
 
 <script>
+import { VueMaskDirective } from 'v-mask';
+
 export default {
   props: {
     users: {
@@ -37,11 +38,15 @@ export default {
       required: true,
     },
   },
+  directives: {
+    mask: VueMaskDirective,
+  },
   data() {
     return {
       username: null,
       telephone: null,
       chief: null,
+      mask: '+7(###) ###-##-##',
     };
   },
   methods: {
@@ -93,12 +98,6 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
-}
-
-.form__hint {
-  position: absolute;
-  top: 100%;
-  right: 0;
 }
 
 .form__input input {
